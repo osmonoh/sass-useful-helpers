@@ -1,0 +1,66 @@
+@import "page";
+@import "maps";
+@import "mixins";
+@import "triangle";
+@import "functions";
+
+header {
+  @include set-bg($dark);
+
+  h1 {
+    @include hf-style;
+    @include font-size("xl");
+
+    @include respond-to("tablet") {
+      @include font-size("l");
+    }
+    @include respond-to("mobile") {
+      text-align: center;
+    }
+  }
+}
+
+.container {
+  @include center;
+}
+
+.triangle {
+  @include triangle(left);
+}
+
+ul {
+  @include reset-list;
+}
+
+.hide {
+  width: 100px;
+  height: 100px;
+  background-color: plum;
+
+  @include hide;
+}
+
+.box {
+  @include fade-in;
+}
+
+li {
+  font-size: fonts-size("m");
+}
+
+footer {
+  @include set-bg($dark);
+
+  p {
+    text-align: right;
+    @include hf-style;
+    @include font-size("sm");
+
+    @include respond-to("tablet") {
+      @include font-size("xs");
+    }
+    @include respond-to("mobile") {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+// ============ FONT-SIZE
+
+@function fonts-size($size) {
+  @if map-get($sizes, $size) {
+    @return map-get($sizes, $size);
+  } @else {
+    @error "Invalid font size! Valid font sizes: 'xs', 'sm', 'm', 'l', 'xl', 'xxl'";
+  }
+}

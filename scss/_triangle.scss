@@ -1,0 +1,64 @@
+// ======== my first attempt using %
+
+// %y {
+//   border-left: 50px solid transparent;
+//   border-right: 50px solid transparent;
+// }
+
+// %x {
+//   border-top: 50px solid transparent;
+//   border-bottom: 50px solid transparent;
+// }
+
+// %up {
+//   @extend %y;
+//   border-bottom: calc(100px * 0.866) solid rebeccapurple;
+// }
+
+// %down {
+//   @extend %y;
+//   border-top: calc(100px * 0.866) solid rebeccapurple;
+// }
+
+// %left {
+//   @extend %x;
+//   border-right: calc(100px * 0.866) solid rebeccapurple;
+// }
+
+// %right {
+//   @extend %x;
+//   border-left: calc(100px * 0.866) solid rebeccapurple;
+// }
+
+// @mixin triangle($direction) {
+//   width: 0;
+//   height: 0;
+//   @extend %#{$direction};
+// }
+
+// ============= my first overcomplicated if-else (nested - not working)
+
+@mixin triangled($direction) {
+  width: 0;
+  height: 0;
+
+  @if $direction == "up" or "down" {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+
+    @if $direction == "up" {
+      border-bottom: calc(100px * 0.866) solid rebeccapurple;
+    } @else if $direction == "down" {
+      border-top: calc(100px * 0.866) solid rebeccapurple;
+    }
+  } @else if $direction == "left" or "right" {
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+
+    @if $direction == "left" {
+      border-right: calc(100px * 0.866) solid rebeccapurple;
+    } @else if $direction == "right" {
+      border-left: calc(100px * 0.866) solid rebeccapurple;
+    }
+  }
+}

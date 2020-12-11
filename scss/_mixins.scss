@@ -1,0 +1,110 @@
+// ========== HEADER + FOOTER style
+
+@mixin hf-style {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4px 12px;
+  font-family: monospace;
+  font-weight: 400;
+}
+
+// ========== LIST RESET
+
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+// ========== CENTER
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+// ========== HIDE
+
+@mixin hide {
+  display: none;
+}
+
+// ============ TRIANGLE
+
+@mixin triangle($direction, $color: rebeccapurple, $size: 50px) {
+  width: 0;
+  height: 0;
+  border: $size solid transparent;
+  @if $direction == up {
+    border-bottom: ($size * 1.732) solid $color;
+    border-top: none;
+  } @else if $direction == down {
+    border-top: ($size * 1.732) solid $color;
+    border-bottom: none;
+  } @else if $direction == left {
+    border-right: ($size * 1.732) solid $color;
+    border-left: none;
+  } @else if $direction == right {
+    border-left: ($size * 1.732) solid $color;
+    border-right: none;
+  } @else {
+    @error "Invalid direction! Valid directions: up, down, left, right.";
+  }
+}
+
+// ========== FADE-IN animation
+
+@mixin fade-in($duration: 5s) {
+  transform: translateY(-100px);
+  opacity: 0;
+  animation: box $duration infinite alternate ease-in-out;
+  @keyframes box {
+    from {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(0) scale(1.2);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+  }
+}
+
+// ============ FONT-SIZE
+
+@mixin font-size($size) {
+  @if map-get($sizes, $size) {
+    font-size: map-get($sizes, $size);
+  } @else {
+    @error "Invalid font size! Valid font sizes: 'xs', 'sm', 'm', 'l', 'xl', 'xxl'";
+  }
+}
+
+// ============= MEDIA QUERIES
+
+@mixin respond-to($device) {
+  @media (max-width: map-get($breakpoints,  $device )) {
+    @content;
+  }
+}
+
+// ========== SET COLORS
+
+@mixin set-color($color) {
+  color: $color;
+}
+
+@mixin set-bg($bg) {
+  background-color: $bg;
+  @if lightness($bg) > 50 {
+    @include set-color($dark);
+  } @else {
+    @include set-color($light);
+  }
+}
